@@ -3,36 +3,41 @@ package com.example.myapp_compose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.myapp_compose.ui.theme.MyAppComposeTheme
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import kotlin.random.Random
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyAppComposeTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
-                }
-            }
+            HomeBackground(Modifier.fillMaxSize())
         }
     }
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    MyAppComposeTheme {
-        Greeting("Android")
+fun HomeBackground(modifier : Modifier = Modifier){
+    val colors = remember {
+        mutableStateOf(Color.Yellow)
     }
+    Box(modifier = modifier
+        .background(colors.value)
+        .clickable {
+            colors.value = Color(
+                Random.nextFloat(),
+                Random.nextFloat(),
+                Random.nextFloat(),
+                1f
+            )
+        }
+    )
 }

@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Color.Companion.Yellow
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.lang.Exception
 
 @Entity(tableName = "note_table")
 data class Note(
@@ -15,3 +16,5 @@ data class Note(
 ){
     val noteColors = listOf(Red, Yellow)
 }
+
+class InvalidNoteException(message : String) : Exception(message)
